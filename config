@@ -14,14 +14,15 @@ set $mod Mod4
 focus_follows_mouse no
 
 # Set font
-font pango: MesloLDSDZ Nerd Font Mono 8
+font pango: MesloLGL Nerd Font Mono 10 
 
 # start nitrogen for wallpaper
 exec_always nitrogen --restore
 
 # start compton for transparency
-exec --no-startup-id compton -b 
+exec --no-startup-id picom -b 
 
+gaps inner 10
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -50,28 +51,7 @@ client.background       #282828
 ###                               STATUS BAR                              ###
 #############################################################################
 
-bar {
-    font pango: Inconsolata 7 
-    position top
-    status_command ~/.local/bin/bumblebee-status \
-        -m memory battery time date \
-        -p time.format="%H:%M" date.format="%a, %b %d %Y" \
-        -t gruvbox-powerline
-
-    colors {
-        background #282828
-        statusline #fbf1c7
-        separator #666666
-
-#       aspect             border  backgr. text
-        focused_workspace  #689d6a #689d6a #fbf1c7
-        active_workspace   #a89984 #a89984 #fbf1c7
-        inactive_workspace #a89984 #a89984 #fbf1c7
-        urgent_workspace   #2f343a #900000 #ffffff
-        binding_mode       #cc241d #cc241d #fbf1c7
-    }
-    padding 0 5px
-}
+exec_always --no-startup-id ~/.config/polybar/launch.sh
 
 #############################################################################
 ###                              KEYBINDINGS                              ###
@@ -86,13 +66,13 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+x exec --no-startup-id ~/.config/rofi/powermenu/type-2/powermenu.sh
 
 # start a terminal
-bindsym $mod+Return exec kitty
+bindsym $mod+Return exec alacritty
 
 # start firefox
 bindsym $mod+n exec firefox
 
 # start dolphin
-bindsym $mod+d exec dolphin
+bindsym $mod+d exec --no-startup-id dolphin
 
 # close focused window
 bindsym $mod+q kill
